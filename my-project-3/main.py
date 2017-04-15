@@ -23,20 +23,26 @@ What is your Birthday?
 
 
 class MainHandler(webapp2.RequestHandler):
-    def write_form(self,error="", month="", day="",year=""):
-        self.response.out.write(form % {"error": error, "month":month,"day":day,"year":year})
-    def valid_month(self,month):
-        months = ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October','November','December']
+
+    def write_form(self, error="", month="", day="", year=""):
+        self.response.out.write(
+            form % {"error": error, "month": month, "day": day, "year": year})
+
+    def valid_month(self, month):
+        months = ['January', 'February', 'March', 'April', 'May', 'June',
+                  'July', 'August', 'September', 'October', 'November', 'December']
         if month:
             cap_month = month.capitalize()
             if cap_month in months:
                 return cap_month
-    def valid_day(self,day):
+
+    def valid_day(self, day):
         if day and day.isdigit():
             day = int(day)
         if day > 0 and day <= 31:
             return day
-    def valid_year(self,year):
+
+    def valid_year(self, year):
         if year and year.isdigit():
             year = int(year)
             if year > 1990 and year < 2020:
@@ -50,13 +56,13 @@ class MainHandler(webapp2.RequestHandler):
         user_day = self.request.get('day')
         user_year = self.request.get('year')
 
-
         month = valid_month(user_month)
         day = valid_day(user_day)
         year = valid_year(user_year)
 
         if not(month and day and year):
-            self.write_form("This is not a valid statement ", user_month, user_day, user_year)
+            self.write_form("This is not a valid statement ",
+                            user_month, user_day, user_year)
         else:
             self.response.out.write("Thanks. This is a valid syntax")
 
