@@ -56,15 +56,15 @@ class MainHandler(webapp2.RequestHandler):
         user_day = self.request.get('day')
         user_year = self.request.get('year')
 
-        month = valid_month(user_month)
-        day = valid_day(user_day)
-        year = valid_year(user_year)
+        month = self.valid_month(user_month)
+        day = self.valid_day(user_day)
+        year = self.valid_year(user_year)
 
         if not(month and day and year):
             self.write_form("This is not a valid statement ",
                             user_month, user_day, user_year)
         else:
-            self.response.out.write("Thanks. This is a valid syntax")
+            self.write_form("Thanks. This is a valid syntax")
 
 
 app = webapp2.WSGIApplication([('/', MainHandler)], debug=True)
