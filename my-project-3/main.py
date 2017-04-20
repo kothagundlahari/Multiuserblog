@@ -69,7 +69,12 @@ class MainHandler(webapp2.RequestHandler):
             self.write_form("This is not a valid statement ",
                             user_month, user_day, user_year)
         else:
-            self.write_form("Thanks. This is a valid syntax")
+            self.redirect("/thanks")
+
+class ThanksHandler(webapp2.RequestHandler):
+    def get(self):
+        self.response.out.write("This is the thank you page and your request is successfull")
 
 
-app = webapp2.WSGIApplication([('/', MainHandler)], debug=True)
+
+app = webapp2.WSGIApplication([('/', MainHandler), ('/thanks', ThanksHandler)], debug=True)
