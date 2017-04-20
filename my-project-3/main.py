@@ -1,5 +1,7 @@
 
 import webapp2
+import cgi
+
 form = """
 <form method="post">
 What is your Birthday?
@@ -24,9 +26,12 @@ What is your Birthday?
 
 class MainHandler(webapp2.RequestHandler):
 
+    def escape_html(self, s):
+        return cgi.escape(s, quote=True)
+
     def write_form(self, error="", month="", day="", year=""):
         self.response.out.write(
-            form % {"error": error, "month": month, "day": day, "year": year})
+            form % {"error": error, "month": self.escape_html(month), "day": self.escape_html(day), "year": self.escape_html(year)})
 
     def valid_month(self, month):
         months = ['January', 'February', 'March', 'April', 'May', 'June',
