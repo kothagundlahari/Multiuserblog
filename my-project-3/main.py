@@ -71,10 +71,13 @@ class MainHandler(webapp2.RequestHandler):
         else:
             self.redirect("/thanks")
 
+
 class ThanksHandler(webapp2.RequestHandler):
+
     def get(self):
-        self.response.out.write("This is the thank you page and your request is successfull")
+        self.response.out.write(
+            "This is the thank you page and your request is successfull")
 
 
-
-app = webapp2.WSGIApplication([('/', MainHandler), ('/thanks', ThanksHandler)], debug=True)
+app = webapp2.WSGIApplication(
+    [('/', MainHandler), ('/thanks', ThanksHandler)], debug=True)
