@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <meta charset="utf-8">
+  <title></title>
+</head>
+
+<body>
+  <form action="">
+
+    <ol>
+      {% for x in range(1, n+1) %}
+      <li>{% if x%15 == 0 %}
+        fizzbuzz
+        {% elif x % 3 == 0 %}
+         fizz {% elif x % 5 == 0 %}
+          buzz {% else %}
+          {{x}} {% endif %}
+        </li> {% endfor %}
+    </ol>
+
+
+  </form>
+</body>
+
+</html>
