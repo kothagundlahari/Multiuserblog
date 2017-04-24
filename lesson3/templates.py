@@ -44,7 +44,7 @@ class MainHandler(Handler):
 class FizzBuzzHandler(Handler):
 
     def get(self):
-        n = self.request.get('n', 0)
+        n = self.request.get('n', 1)
         n = n and int(n)
         self.render('fizzbuzz.html', n=n)
 
