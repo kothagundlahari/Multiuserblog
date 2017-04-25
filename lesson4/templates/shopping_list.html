@@ -1,21 +1,23 @@
-<!DOCTYPE html>
-<html>
-
-<head>
-  <meta charset="utf-8">
-  <title></title>
-</head>
-
-<body>
-  <form action="">
-    <h2>Add your food items</h2>
+<form>
+    <h2>Add a Food</h2>
     <input type="text" name="food">
-    <button type="button"> Add</button>
-    <br>
+    {% if items %}
+        {% for item in items %}
+            <input type="hidden" name="food" value="{{item}}">
+        {% endfor %}
+    {% endif %}
 
+    <button>Add</button>
 
+    {% if items %}
+        <br>
+        <br>
 
-  </form>
-</body>
-
-</html>
+        <h2>Shopping List</h2>
+        <ul>
+            {% for item in items %}
+                <li>{{ item }}</li>
+            {% endfor %}
+        </ul>
+    {% endif %}
+ </form>

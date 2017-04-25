@@ -18,7 +18,6 @@ shopping_list_html = """
   <ul>
   %s
   </ul>
-
 """
 
 
