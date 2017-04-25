@@ -23,8 +23,8 @@ class Handler(webapp2.RequestHandler):
 
 class MainHandler(Handler):
 
-    def translate(self, word):
-        word = string.maketrans(
+    def get_translation(self):
+        return string.maketrans(
             "ABCDEFGHIJKLMabcdefghijklmNOPQRSTUVWXYZnopqrstuvwxyz",
             "NOPQRSTUVWXYZnopqrstuvwxyzABCDEFGHIJKLMabcdefghijklm")
 
@@ -32,8 +32,8 @@ class MainHandler(Handler):
         self.render("rot13.html")
 
     def post(self):
-        word = self.request.get_all('text')
-        output = self.translate(word)
+        word = str(self.request.get('text'))
+        output = word.translate(self.get_translation())
         self.render('Rot13.html', text=output)
 
 
