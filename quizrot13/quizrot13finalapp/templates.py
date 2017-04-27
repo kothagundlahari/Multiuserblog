@@ -2,7 +2,6 @@ import os
 import jinja2
 import webapp2
 import string
-import webapp2
 
 template_dir = os.path.join(os.path.dirname(__file__), 'templates')
 jinja_env = jinja2.Environment(
@@ -28,11 +27,11 @@ class Rot13(Handler):
         self.render("rot13.html")
 
     def post(self):
-        text = ''
+        rot13 = ''
         text = self.request.get('text')
         if text:
-            text = text.encode('rot13')
-        self.render('rot13.html', text=text)
+            rot13 = text.encode('rot13')
+        self.render('rot13.html', text=rot13)
 
 
 app = webapp2.WSGIApplication([('/', Rot13)
