@@ -21,22 +21,18 @@ class Handler(webapp2.RequestHandler):
         self.write(self.render_str(template, **kw))
 
 
-class MainHandler(Handler):
-
-    def get_translation(self):
-        return string.maketrans(
-            "ABCDEFGHIJKLMabcdefghijklmNOPQRSTUVWXYZnopqrstuvwxyz",
-            "NOPQRSTUVWXYZnopqrstuvwxyzABCDEFGHIJKLMabcdefghijklm")
+class Rot13(Handler):
 
     def get(self):
         self.render("rot13.html")
 
     def post(self):
-        word = str(self.request.get('text'))
-        output = word.translate(self.get_translation())
-        self.render('Rot13.html', text=output)
+        rot13 = ''
+        text = self.request.get('text')
+        if text:
+            rot13 = text.encode('rot13')
+        self.render('rot13.html', text=rot13)
 
 
-app = webapp2.WSGIApplication([
-    ('/', MainHandler)
-], debug=True)
+app = webapp2.WSGIApplication([('/', Rot13)
+                               ], debug=True)
