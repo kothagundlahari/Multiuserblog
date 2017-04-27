@@ -25,12 +25,7 @@ class SignUp(Handler):
     def get(self):
         self.render("signup.html")
 
-    def post(self):
-        rot13 = ''
-        text = self.request.get('text')
-        if text:
-            rot13 = text.encode('rot13')
-        self.render('signup.html', text=rot13)
+    
 
 
 app = webapp2.WSGIApplication([('/', SignUp)
