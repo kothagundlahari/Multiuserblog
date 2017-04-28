@@ -1,6 +1,3 @@
-"""
-high level support for doing this and that.
-"""
 import os
 import jinja2
 import webapp2
@@ -30,4 +27,5 @@ class SignUp(Handler):
         self.render("signup.html")
 
 
-app = webapp2.WSGIApplication([('/', SignUp)], debug=True)
+app = webapp2.WSGIApplication(
+    [('/', SignUp) ], debug=True)
