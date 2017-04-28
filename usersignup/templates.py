@@ -1,10 +1,14 @@
+"""
+high level support for doing this and that.
+"""
 import os
 import jinja2
 import webapp2
-import string
+
 
 template_dir = os.path.join(os.path.dirname(__file__), 'templates')
-jinja_env = jinja2.Environment(loader=jinja2.FileSystemLoader(template_dir), autoescape=True)
+jinja_env = jinja2.Environment(loader=jinja2.FileSystemLoader(template_dir),
+                               autoescape=True)
 
 
 class Handler(webapp2.RequestHandler):
@@ -25,8 +29,5 @@ class SignUp(Handler):
     def get(self):
         self.render("signup.html")
 
-    
 
-
-app = webapp2.WSGIApplication([('/', SignUp)
-                               ], debug=True)
+app = webapp2.WSGIApplication([('/', SignUp)], debug=True)
