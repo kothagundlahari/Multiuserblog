@@ -21,9 +21,6 @@ class Handler(webapp2.RequestHandler):
     def render(self, template, **kw):
         self.write(self.render_str(template, **kw))
 
-
-class SignUp(Handler):
-
     def valid_username(self, username):
         USER_RE = re.compile(r"^[a-zA-Z0-9_-]{3,20}$")
         return username and USER_RE.match(username)
@@ -35,6 +32,9 @@ class SignUp(Handler):
     def valid_email(self, email):
         EMAIL_RE = re.compile(r'^[\S]+@[\S]+\.[\S]+$')
         return not email or EMAIL_RE.match(email)
+
+
+class SignUp(Handler):
 
     def get(self):
         self.render("signup.html")
@@ -64,12 +64,18 @@ class SignUp(Handler):
         if have_error:
             self.render('signup.html', **params)
         else:
-            self.redirect('/welcome.html' username)
+            self.redirect('/welcome?username=' + username)
 
 
 class WelcomePage(Handler):
+
     def get(self):
-        self.render("welcome.html")
+        username = self.request.get('username')
+
+        if valid_username(username):
+            self.render('welcome.html', username=username)
+        else:
+            self.redirect('/signup')
 
 
 app = webapp2.WSGIApplication(
