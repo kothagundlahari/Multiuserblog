@@ -1,6 +1,7 @@
 import os
 import jinja2
 import webapp2
+import re
 
 
 template_dir = os.path.join(os.path.dirname(__file__), 'templates')
@@ -27,5 +28,11 @@ class SignUp(Handler):
         self.render("signup.html")
 
 
+class WelcomePage(Handler):
+    def get(self):
+        self.render("welcome.html")
+
+
+
 app = webapp2.WSGIApplication(
-    [('/', SignUp) ], debug=True)
+    [('/', SignUp),('/welcome', WelcomePage)], debug=True)
